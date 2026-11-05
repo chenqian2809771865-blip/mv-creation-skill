@@ -1,0 +1,38 @@
+# 用户自备素材、模型和渲染产物
+*.wav
+*.mp3
+*.flac
+*.m4a
+*.aac
+*.ogg
+*.aiff
+*.wma
+*.mp4
+*.mov
+*.mkv
+*.webm
+*.avi
+*.onnx
+*.onnx.data
+*.tgz
+*.zip
+chunks*/
+out/
+models/
+node_modules/
+__pycache__/
+*.py[cod]
+.DS_Store
+.venv/
+venv/
+.cache/
+# get_fonts.py 按需下载的字体；随附快乐体保留
+**/fonts/unifont.ttf
+**/assets/unifont.ttf
+**/fp12/
+**/LXGWWenKai-Regular.ttf
+*.part
+# 本地配置密钥
+.env
+.env.*
+!.env.example

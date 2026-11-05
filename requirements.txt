@@ -1,0 +1,19 @@
+# Python 3.10+；系统还需 ffmpeg 和 ffprobe。
+# 包名与下限版本已按 PyPI 元数据核对；按实际 Python import 列出。
+# 图像、像素与水彩渲染
+numpy>=1.24.0
+Pillow>=9.1.0
+scipy>=1.10.0
+skia-python>=138.0
+
+# UVR 人声分离、SenseVoice 逐字对齐与同音匹配
+onnxruntime>=1.17.0
+sherpa-onnx>=1.10.45
+pypinyin>=0.49.0
+
+# get_fonts.py 转换 Fusion Pixel 的 WOFF2 字体
+fonttools>=4.38.0
+Brotli>=1.0.9
+
+# beat_track.py 使用 numpy/scipy，不依赖 librosa。
+# Node.js/npm 仅运行 p5 模板时需要；字体由 Python 下载。
