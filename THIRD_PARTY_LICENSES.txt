@@ -55,11 +55,11 @@ SOFTWARE.
 根目录 LICENSE 的 MIT 许可覆盖本项目自有代码和文档。下列第三方字体及
 笔顺派生数据分别适用其原许可证，不因与本项目一同分发而改用 MIT。
 本项目保留以上 opus-video-skills、ClaudeAnimationBase 的两段 MIT 声明，
-并保留 skills/mv-creation/assets/painted-character/LICENSE。
+并保留 skills/xingsu-mv-studio/assets/painted-character/LICENSE。
 
 ZCOOL KuaiLe（站酷快乐体）
 
-分发文件：skills/mv-creation/assets/engines/watercolor-clawd/fonts/ZCOOLKuaiLe-Regular.ttf
+分发文件：skills/xingsu-mv-studio/assets/engines/watercolor-clawd/fonts/ZCOOLKuaiLe-Regular.ttf
 来源：https://github.com/google/fonts/tree/main/ofl/zcoolkuaile
 许可证来源：https://github.com/google/fonts/blob/main/ofl/zcoolkuaile/OFL.txt
 许可证：SIL Open Font License 1.1（下附上游原文）。

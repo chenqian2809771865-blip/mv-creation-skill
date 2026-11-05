@@ -1,4 +1,4 @@
-# mv-creation：动画 MV 制作技能
+# 星溯 MV 工坊（xingsu-mv-studio）
 
 一个以中文编写的 Agent Skill，把用户提供的歌曲、歌词和创意整理成动画 MV：支持水彩手绘、像素校园角色和 Clawd 角色，按节拍设计动作与转场，逐字对齐歌词，导出 2K 母版、720p 预览、SRT/VTT、分镜和标题关键帧。
 
@@ -40,20 +40,20 @@ ffmpeg -version
 ffprobe -version
 ```
 
-**Claude Code**：把整个 `skills/mv-creation/` 复制到个人技能目录 `~/.claude/skills/mv-creation/`，或项目的 `.claude/skills/mv-creation/`。例如从仓库根目录执行：
+**Claude Code**：把整个 `skills/xingsu-mv-studio/` 复制到个人技能目录 `~/.claude/skills/xingsu-mv-studio/`，或项目的 `.claude/skills/xingsu-mv-studio/`。例如从仓库根目录执行：
 
 ```bash
 mkdir -p ~/.claude/skills
-cp -R skills/mv-creation ~/.claude/skills/
+cp -R skills/xingsu-mv-studio ~/.claude/skills/
 ```
 
-在 Claude Code 中通过 `/mv-creation` 调用，也可以直接描述制作动画 MV 的任务。安装目录以 [Claude Code 技能文档](https://code.claude.com/docs/en/skills) 为准。
+在 Claude Code 中通过 `/xingsu-mv-studio` 调用，也可以直接描述制作动画 MV 的任务。安装目录以 [Claude Code 技能文档](https://code.claude.com/docs/en/skills) 为准。 如果已安装旧名 `mv-creation`，请移除或禁用旧版后再安装新版，避免重复加载。
 
-**其他支持 SKILL.md 的工具**：将完整 `mv-creation` 目录复制到宿主规定的技能目录，确认宿主可以读取其脚本和资源。设备传输工具不会在各宿主间自动通用。
+**其他支持 SKILL.md 的工具**：将完整 `xingsu-mv-studio` 目录复制到宿主规定的技能目录，确认宿主可以读取其脚本和资源。设备传输工具不会在各宿主间自动通用。
 
 ## 首次使用
 
-1. 编辑 `skills/mv-creation/config.json` 的 `SIGNATURE`，把「★你的署名」换成自己的署名。未设置时技能应先询问用户；环境变量 `MV_SIGNATURE` 可覆盖配置。
+1. 编辑 `skills/xingsu-mv-studio/config.json` 的 `SIGNATURE`，把「★你的署名」换成自己的署名。未设置时技能应先询问用户；环境变量 `MV_SIGNATURE` 可覆盖配置。
 2. 提供你有权使用的歌曲音频和歌词，指定歌曲区间、画幅与角色。仓库中的歌词都是等长占位示例，旧时序仅用于演示结构，不能用于其他歌曲的正式对齐。
 3. 在独立工程目录复制所需引擎、技能的 `scripts/` 和 `config.json`，按 `SKILL.md` 和引擎 README 准备数据。原资源保持只读，输出写到用户指定目录，默认 `./MV作品/<歌名>_MV/`。
 4. 先渲预览自查，再导出母版。实际音乐需要重新检测拍点和逐字对齐。
@@ -83,7 +83,7 @@ python3 scripts/get_fonts.py assets --unifont
 python3 scripts/build_strokes.py data/lyrics.json --out code/strokes.json
 ```
 
-随附两个 `strokes.json` 仅保留占位歌词的示例字符；换歌词或片名后须重新生成。修改与许可说明见对应目录的 `strokes-说明.md`。模型、字体与笔顺的来源详见 [组件来源](skills/mv-creation/references/sources.md)。
+随附两个 `strokes.json` 仅保留占位歌词的示例字符；换歌词或片名后须重新生成。修改与许可说明见对应目录的 `strokes-说明.md`。模型、字体与笔顺的来源详见 [组件来源](skills/xingsu-mv-studio/references/sources.md)。
 
 ## 目录
 
@@ -94,7 +94,7 @@ THIRD_PARTY_LICENSES.txt      上游 MIT、字体 OFL 与笔顺 APL 全文
 requirements.txt             Python 依赖
 .gitignore                   素材、下载模型、渲染输出等忽略规则
 docs/                        无歌词的效果截图
-skills/mv-creation/
+skills/xingsu-mv-studio/
   SKILL.md                   技能入口
   config.json                可配置署名
   references/                制作、来源与交付说明
@@ -109,13 +109,13 @@ skills/mv-creation/
     painted-character/      可选 p5 模板（保留上游 LICENSE）
 ```
 
-工程模块来源与用途见 `skills/mv-creation/assets/engines/watercolor-modules/README.md`。仅收录实际引用的代码及必要本地导入文件，原工程音频、歌词、渲染图片和 chunks 不随模块收录。原说明中的《说好不哭》48px 角色工程已删除，未补造。
+工程模块来源与用途见 `skills/xingsu-mv-studio/assets/engines/watercolor-modules/README.md`。仅收录实际引用的代码及必要本地导入文件，原工程音频、歌词、渲染图片和 chunks 不随模块收录。原说明中的《说好不哭》48px 角色工程已删除，未补造。
 
 ## 本次整理验证与待处理项
 
 2026-11-05 已在独立 Python 3.12 环境按 `requirements.txt` 完整安装依赖，`pip check` 通过。使用 ffmpeg 生成 10 秒 440 Hz 正弦测试音，取前 3 秒配占位数据，通过 `scripts/mvrun.py --profile preview` 渲出 1280×720、24 fps、72 帧的 H.264 + AAC 视频，完整解码无错误。
 
-**色彩检查尚未通过**：编码分段和最终文件均有 BT.709 矩阵标记，但原色与传递特性为未指定；现有 `COLOR_TAGS` 参数齐全，根因尚未定位。原编码逻辑保持原样，不能据此宣称所有运行检查通过。正式出片前应定位并修复这个问题，再用 `scripts/master.py check` 验收。
+**色彩检查已通过**：在编码、缩放和预览滤镜中补充逐帧 BT.709 标记后，使用 ffmpeg 7.1 重新渲染并执行 `scripts/master.py check`，结果为 `bt709/bt709/bt709/tv`；压缩预览和缩放分支的色彩标记也已核对。
 
 测试使用了完整 ffmpeg（需要 rawvideo 输入支持）；macOS 测试进程另设 `OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES` 才能完成现有 fork 渲染流程，未更改系统配置或引擎代码。这是本次测试的环境条件，不代表其他系统也需要该设置。
 
@@ -129,4 +129,4 @@ skills/mv-creation/
 
 ## English overview
 
-mv-creation is a Chinese-language Agent Skill for watercolor and pixel-art animated music videos, with beat-synced motion, character-level lyric alignment, and 2K export. Bring your own authorized audio and lyrics; this repository contains placeholder text and no song audio or lyrics. This is an unofficial project, unaffiliated with Anthropic. Clawd is an Anthropic character; the MIT license covers project code and documentation only, subject to the included third-party notices.
+xingsu-mv-studio is a Chinese-language Agent Skill for watercolor and pixel-art animated music videos, with beat-synced motion, character-level lyric alignment, and 2K export. Bring your own authorized audio and lyrics; this repository contains placeholder text and no song audio or lyrics. This is an unofficial project, unaffiliated with Anthropic. Clawd is an Anthropic character; the MIT license covers project code and documentation only, subject to the included third-party notices.
